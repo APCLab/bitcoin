@@ -1,18 +1,17 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build Bitcoin Core in Unix.
+這是一些關於如何在Unix上建立Bitcoin Core的筆記。
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
 Note
 ---------------------
-Always use absolute paths to configure and compile bitcoin and the dependencies,
-for example, when specifying the path of the dependency:
+總是用絕對路徑來配置和編譯比特幣和相依套件，
+舉例來說，當說明相依套件的路徑:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 
-Here BDB_PREFIX must be an absolute path - it is defined using $(pwd) which ensures
-the usage of the absolute path.
+在這裡BDB_PREFIX必須是一個絕對路徑 - 它被定義要使用 $(pwd) 來確定他這個絕對路徑的用法。
 
 To Build
 ---------------------
@@ -24,28 +23,28 @@ make
 make install # optional
 ```
 
-This will build bitcoin-qt as well if the dependencies are met.
+如果相依套件正確的話，這也會建立 bitcoin-qt。
 
 Dependencies
 ---------------------
 
-These dependencies are required:
+需要的相依套件:
 
- Library     | Purpose          | Description
+ 函式庫      | 目的             | 描述
  ------------|------------------|----------------------
- libssl      | Crypto           | Random Number Generation, Elliptic Curve Cryptography
- libboost    | Utility          | Library for threading, data structures, etc
- libevent    | Networking       | OS independent asynchronous networking
+ libssl      | Crypto           | Random Number Generation, 橢圓曲線密碼學
+ libboost    | Utility          | 函式庫包含執行續、資料結構...等
+ libevent    | Networking       | 作業系統獨立非同步網路連結
 
-Optional dependencies:
+可選擇的相依套件:
 
- Library     | Purpose          | Description
+ 函式庫      | 目的             | 描述
  ------------|------------------|----------------------
- miniupnpc   | UPnP Support     | Firewall-jumping support
- libdb4.8    | Berkeley DB      | Wallet storage (only needed when wallet enabled)
- qt          | GUI              | GUI toolkit (only needed when GUI enabled)
- protobuf    | Payments in GUI  | Data interchange format used for payment protocol (only needed when GUI enabled)
- libqrencode | QR codes in GUI  | Optional for generating QR codes (only needed when GUI enabled)
+ miniupnpc   | UPnP Support     | 跳防火牆輔助
+ libdb4.8    | Berkeley DB      | 錢包儲存 (只有錢包啟動時需要)
+ qt          | GUI              | 圖形用戶介面工具包 (只有圖形用戶介面啟動時需要)
+ protobuf    | Payments in GUI  | Data interchange format used for payment protocol (只有圖形用戶介面啟動時需要)
+ libqrencode | QR codes in GUI  | Optional for generating QR codes (只有圖形用戶介面啟動時需要)
  univalue    | Utility          | JSON parsing and encoding (bundled version will be used unless --with-system-univalue passed to configure)
  libzmq3     | ZMQ notification | Optional, allows generating ZMQ notifications (requires ZMQ version >= 4.x)
 
