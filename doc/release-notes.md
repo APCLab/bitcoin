@@ -89,18 +89,17 @@ see `getmempoolentry`, `getmempoolancestors`, `getmempooldescendants`.
 
 ### P2P protocol and network code
 
-The p2p alert system has been removed in #7692 and the 'alert' message is no longer supported.
+p2p警報系統在 #7692 中被移除且不再支援'alert' message
 
 
 Fee filtering of invs (BIP 133)
 ------------------------------------
 
-The optional new p2p message "feefilter" is implemented and the protocol
-version is bumped to 70013. Upon receiving a feefilter message from a peer,
-a node will not send invs for any transactions which do not meet the filter
-feerate. [BIP 133](https://github.com/bitcoin/bips/blob/master/bip-0133.mediawiki)
+可選擇的新p2p訊息"feefilter"已經實作完成且此協定版本is bumped to 70013
+在從一個peer收到一個feefilter訊息後,一個node不會為了任何不符合filter feerate的交易再送出invs
+ [BIP 133](https://github.com/bitcoin/bips/blob/master/bip-0133.mediawiki)
 
-### Validation
+### Validation(有效性)
 
 ### Build system
 
@@ -110,5 +109,5 @@ feerate. [BIP 133](https://github.com/bitcoin/bips/blob/master/bip-0133.mediawik
 
 ### Tests
 
-### Miscellaneous
+### Miscellaneous(各式各樣的)
 
