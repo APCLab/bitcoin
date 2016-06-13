@@ -1,60 +1,52 @@
-(note: this is a temporary file, to be added-to by anybody, and moved to
-release-notes at release time)
+(note:這是一個暫時性的文件，可任意更改，然後會在發布時被移到release-notes)
 
 Bitcoin Core version *version* is now available from:
 
   <https://bitcoin.org/bin/bitcoin-core-*version*/>
 
-This is a new major version release, including new features, various bugfixes
-and performance improvements, as well as updated translations.
+這是一個先釋出的版本，包含新的features,各種bug修改，performance improvements和更新的翻譯
 
-Please report bugs using the issue tracker at github:
+如果有發現bug請用github的issue tracker回報
 
   <https://github.com/bitcoin/bitcoin/issues>
 
-To receive security and update notifications, please subscribe to:
+要收到安全性或更新通知,請訂閱以下
 
   <https://bitcoincore.org/en/list/announcements/join/>
 
-Notable changes
+值得注意的修改
 ===============
 
 Example item
 ----------------
 
 
-bitcoin-cli: arguments privacy
+bitcoin-cli: arguments隱私
 --------------------------------
 
-The RPC command line client gained a new argument, `-stdin`
-to read extra arguments from standard input, one per line until EOF/Ctrl-D.
+RPC command line client新增了一項argument, `-stdin`
+來從標準的輸入中讀入額外的arguments,一行一個直到 EOF/Ctrl-D.
 For example:
 
     $ echo -e "mysecretcode\n120" | src/bitcoin-cli -stdin walletpassphrase
 
-It is recommended to use this for sensitive information such as wallet
-passphrases, as command-line arguments can usually be read from the process
-table by any user on the system.
+這個推薦可以給易變的資料來做使用,像wallet passphrases,同時command-line arguments可以頻繁的自process table中供所有系統的使用者讀取
 
-RPC low-level changes
+RPC 底層更動
 ----------------------
 
-- `gettxoutsetinfo` UTXO hash (`hash_serialized`) has changed. There was a divergence between
-  32-bit and 64-bit platforms, and the txids were missing in the hashed data. This has been
-  fixed, but this means that the output will be different than from previous versions.
+- `gettxoutsetinfo` UTXO hash (`hash_serialized`) 做了更動. 原本32-bit和64-bit平台間有歧異,且hashed data中的txids遺失了.這已經被修正了,但這意味著輸出會和前一版本不同
+
 
 C++11 and Python 3
 -------------------
 
-Various code modernizations have been done. The Bitcoin Core code base has
-started using C++11. This means that a C++11-capable compiler is now needed for
-building. Effectively this means GCC 4.7 or higher, or Clang 3.3 or higher.
+一些code modernizations(現代化)被完成,比特幣核心code base已經開始使用C++11.這意味著現在要build需要一個C++11相容的compiler,簡單來說就是GCC 4.7 or higher,或Clang 3.3 or higher.
 
-When cross-compiling for a target that doesn't have C++11 libraries, configure with
+若要cross-compiling for一個沒有C++11的目標,請裝配
 `./configure --enable-glibc-back-compat ... LDFLAGS=-static-libstdc++`.
 
-For running the functional tests in `qa/rpc-tests`, Python3.4 or higher is now
-required.
+如果要跑 `qa/rpc-tests`中的函數測試,現在需要 Python3.4 or higher
 
 0.13.0 Change log
 =================
