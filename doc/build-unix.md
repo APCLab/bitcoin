@@ -1,16 +1,16 @@
 UNIX BUILD NOTES
 ====================
-這是一些關於如何在Unix上建立Bitcoin Core的筆記。
+這是一些關於如何在 Unix 上建立 Bitcoin Core 的筆記。
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
 Note
 ---------------------
-總是用絕對路徑來配置和編譯比特幣和相依套件，舉例來說，當說明相依套件的路徑:
+總是用絕對路徑來配置和編譯比特幣和相依套件，舉例來說，當決定相依套件的路徑:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 
-在這裡BDB_PREFIX必須是一個絕對路徑 - 它被定義要使用 $(pwd) 來確定他這個絕對路徑的用法。
+在這裡 BDB_PREFIX 必須是一個絕對路徑 - 它被定義要使用 $(pwd) 來確定這個絕對路徑的使用。
 
 To Build
 ---------------------
@@ -52,73 +52,63 @@ Dependencies
 Memory Requirements
 --------------------
 
-C++ 編譯器非常需要記憶體，當編譯 Bitcoin Core 時，建議至少要有 1.5 GB 的記憶體可以使用，On systems with less, gcc can be tuned to conserve memory with additional CXXFLAGS:
+C++ 編譯器非常需要記憶體，當編譯 Bitcoin Core 時，建議至少要有 1.5 GB 的記憶體可以使用，當系統低於此現時， gcc 能夠調整至附加的 CXXFLAGS 來保存記憶體:
 
 
     ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
 
 Dependency Build Instructions: Ubuntu & Debian
 ----------------------------------------------
-Build requirements:
+建立需求:
 
     sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
 
-Options when installing required Boost library files:
+安裝時需要的 Boost 函式庫檔案的選項:
 
-1. On at least Ubuntu 14.04+ and Debian 7+ there are generic names for the
-individual boost development packages, so the following can be used to only
-install necessary parts of boost:
+1. 在至少 Ubuntu 14.04+ 和 Debian 7+ 版本，它們是個別 boost 開發包的屬名，所以下列的可以使用來只安裝 boost 中必要的部分:
 
         sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 
-2. If that doesn't work, you can install all boost development packages with:
+2. 如果那不能運作，可以全部安裝:
 
         sudo apt-get install libboost-all-dev
 
-BerkeleyDB is required for the wallet. db4.8 packages are available [here](https://launchpad.net/~bitcoin/+archive/bitcoin).
-You can add the repository and install using the following commands:
+錢包需要 BerkeleyDB ， db4.8 包可以使用 [here](https://launchpad.net/~bitcoin/+archive/bitcoin)。 你可以使用以下的指令來新增存放處和安裝:
 
     sudo add-apt-repository ppa:bitcoin/bitcoin
     sudo apt-get update
     sudo apt-get install libdb4.8-dev libdb4.8++-dev
 
-Ubuntu and Debian have their own libdb-dev and libdb++-dev packages, but these will install
-BerkeleyDB 5.1 or later, which break binary wallet compatibility with the distributed executables which
-are based on BerkeleyDB 4.8. If you do not care about wallet compatibility,
-pass `--with-incompatible-bdb` to configure.
+Ubuntu 和 Debian 有他們自己的 libdb-dev 和 libdb++-dev 包，但這要安裝 BerkeleyDB 5.1 或更之後的版本，那會因為基於 BerkeleyDB 4.8 上分散式執行，而破壞二元錢包的一致性，如果你不在乎錢包的一致性，輸入 `--with-incompatible-bdb` 來配置。
 
-See the section "Disable-wallet mode" to build Bitcoin Core without wallet.
+看 "Disable-wallet mode" 的部分來建立不用錢包的 Bitcoin Core。
 
-Optional:
+可選擇的:
 
     sudo apt-get install libminiupnpc-dev (see --with-miniupnpc and --enable-upnp-default)
 
-ZMQ dependencies:
+ZMQ 相依套件:
 
     sudo apt-get install libzmq3-dev (provides ZMQ API 4.x)
 
 Dependencies for the GUI: Ubuntu & Debian
 -----------------------------------------
 
-If you want to build Bitcoin-Qt, make sure that the required packages for Qt development
-are installed. Either Qt 5 or Qt 4 are necessary to build the GUI.
-If both Qt 4 and Qt 5 are installed, Qt 5 will be used. Pass `--with-gui=qt4` to configure to choose Qt4.
-To build without GUI pass `--without-gui`.
+如果你想要建立 Bitcoin-Qt, 確認這些 Qt 開發所需要的包是否安裝了， Qt 5 和 Qt 4 都可以用來建立圖形用戶介面。如果你兩個都裝了，它會使用 Qt 5，輸入 `--with-gui=qt4` 來配置選擇 Qt 4，建立不用圖形用戶介面的則輸入 `--without-gui`。
 
-To build with Qt 5 (recommended) you need the following:
+用 Qt 5 (建議的) 來建立需要以下:
 
     sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
 
-Alternatively, to build with Qt 4 you need the following:
+或者，用 Qt 4 來建立需要以下:
 
     sudo apt-get install libqt4-dev libprotobuf-dev protobuf-compiler
 
-libqrencode (optional) can be installed with:
+libqrencode (可選擇的) 可以用以下來安裝:
 
     sudo apt-get install libqrencode-dev
 
-Once these are installed, they will be found by configure and a bitcoin-qt executable will be
-built by default.
+安裝後，他們可以被配置找到，然後一個 bitcoin-qt 執行檔會預設建立。
 
 Dependency Build Instructions: Fedora
 -------------------------------------
