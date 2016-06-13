@@ -79,7 +79,7 @@ Dependency Build Instructions: Ubuntu & Debian
     sudo apt-get update
     sudo apt-get install libdb4.8-dev libdb4.8++-dev
 
-Ubuntu 和 Debian 有他們自己的 libdb-dev 和 libdb++-dev 包，但這要安裝 BerkeleyDB 5.1 或更之後的版本，那會因為基於 BerkeleyDB 4.8 上分散式執行，而破壞二元錢包的一致性，如果你不在乎錢包的一致性，輸入 `--with-incompatible-bdb` 來配置。
+Ubuntu 和 Debian 有他們自己的 libdb-dev 和 libdb++-dev 包，但這要安裝 BerkeleyDB 5.1 或更之後的版本，那會因為基於 BerkeleyDB 4.8 上分散式執行，而破壞二進制錢包的一致性，如果你不在乎錢包的一致性，輸入 `--with-incompatible-bdb` 來配置。
 
 看 "Disable-wallet mode" 的部分來建立不用錢包的 Bitcoin Core。
 
@@ -112,43 +112,41 @@ libqrencode (可選擇的) 可以用以下來安裝:
 
 Dependency Build Instructions: Fedora
 -------------------------------------
-Build requirements:
+建立需求:
 
     sudo dnf install gcc-c++ libtool make autoconf automake openssl-devel libevent-devel boost-devel libdb4-devel libdb4-cxx-devel
 
-Optional:
+可選擇的:
 
     sudo dnf install miniupnpc-devel
 
-To build with Qt 5 (recommended) you need the following:
+用 Qt 5 (建議的) 來建立需要以下:
 
     sudo dnf install qt5-qttools-devel qt5-qtbase-devel protobuf-devel
 
-libqrencode (optional) can be installed with:
+libqrencode (可選擇的) 可以用以下來安裝:
 
     sudo dnf install qrencode-devel
 
 Notes
 -----
-The release is built with GCC and then "strip bitcoind" to strip the debug
-symbols, which reduces the executable size by about 90%.
+這個發布是用 GCC 來建立的，然後 "strip bitcoind" 來去除除錯符號，減少了大約 90% 的執行檔大小。
 
 
 miniupnpc
 ---------
 
-[miniupnpc](http://miniupnp.free.fr/) may be used for UPnP port mapping.  It can be downloaded from [here](
-http://miniupnp.tuxfamily.org/files/).  UPnP support is compiled in and
-turned off by default.  See the configure options for upnp behavior desired:
+[miniupnpc](http://miniupnp.free.fr/) 可以用來 UPnP port mapping，可以從 [here](
+http://miniupnp.tuxfamily.org/files/) 下載，UPnP support 會被編譯進去然後預設會是關閉的，對 UPnP 行為有需求的可以看這個配置選項:
 
-	--without-miniupnpc      No UPnP support miniupnp not required
-	--disable-upnp-default   (the default) UPnP support turned off by default at runtime
-	--enable-upnp-default    UPnP support turned on by default at runtime
+	--without-miniupnpc      沒有 UPnP support ， miniupnp 不需要
+	--disable-upnp-default   (預設) UPnP support 在運行時預設關閉
+	--enable-upnp-default    UPnP support 在運行時預設開啟
 
 
 Berkeley DB
 -----------
-It is recommended to use Berkeley DB 4.8. If you have to build it yourself:
+如果你需自行建立，建議使用 Berkeley DB 4.8 :
 
 ```bash
 BITCOIN_ROOT=$(pwd)
@@ -175,11 +173,11 @@ cd $BITCOIN_ROOT
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
 ```
 
-**Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
+**Note**: 你只有在錢包啟動時才需要使用 Berkeley DB (看於下的 *Disable-Wallet mode* 部分).
 
 Boost
 -----
-If you need to build Boost yourself:
+如果你需要自行建立 Boost :
 
 	sudo su
 	./bootstrap.sh
@@ -188,9 +186,8 @@ If you need to build Boost yourself:
 
 Security
 --------
-To help make your bitcoin installation more secure by making certain attacks impossible to
-exploit even if a vulnerability is found, binaries are hardened by default.
-This can be disabled with:
+儘管一個弱點被發現，以將一定的攻擊化為不可能的開方方式，使編譯的過後的程式更堅固，來幫助 bitcoin 安裝能更安全。stallation more secure 
+這可以讓它無效:
 
 Hardening Flags:
 
@@ -198,17 +195,12 @@ Hardening Flags:
 	./configure --disable-hardening
 
 
-Hardening enables the following features:
+Hardening 有下列特色:
 
-* Position Independent Executable
-    Build position independent code to take advantage of Address Space Layout Randomization
-    offered by some kernels. Attackers who can cause execution of code at an arbitrary memory
-    location are thwarted if they don't know where anything useful is located.
-    The stack and heap are randomly located by default but this allows the code section to be
-    randomly located as well.
+* 地址無關可執行文件
+    建立地址無關代碼可以讓一些 kernels 提供位址空間配置隨機載入的優點，可以攻擊任意記憶體位址的攻擊者會因為他們不知道哪裡放的資料是有用的而失敗， stack 和 heap 可以隨機配置，這也讓 code section 也能隨機配置。
 
-    On an AMD64 processor where a library was not compiled with -fPIC, this will cause an error
-    such as: "relocation R_X86_64_32 against `......' can not be used when making a shared object;"
+    在一個沒有用 -fPIC 來編譯函式庫的 AMD64 處理器，這會導致一個錯誤像是: "relocation R_X86_64_32 against `......' can not be used when making a shared object;"
 
     To test that you have built PIE executable, install scanelf, part of paxutils, and use:
 
@@ -237,26 +229,24 @@ Hardening enables the following features:
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, bitcoin may be compiled in
-disable-wallet mode with:
+如果目的只是運行 P2P 節點而不用錢包， bitcoin 可以在無錢包模式下建立:
 
     ./configure --disable-wallet
 
-In this case there is no dependency on Berkeley DB 4.8.
+在這個案例裡，不用 Berkeley DB 4.8 的相依套件。
 
-Mining is also possible in disable-wallet mode, but only using the `getblocktemplate` RPC
-call not `getwork`.
+在無錢包模式下仍然可以挖礦，但只能使用 `getblocktemplate` RPC call 而非 `getwork`。
 
 Additional Configure Flags
 --------------------------
-A list of additional configure flags can be displayed with:
+可以顯示附加配置的 flags 的清單:
 
     ./configure --help
 
 
 Setup and Build Example: Arch Linux
 -----------------------------------
-This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
+這個例子列出在上次更動的 Arch Linux 上設置和建立一個指令列且無錢包分布的必要步驟:
 
     pacman -S git base-devel boost libevent python
     git clone https://github.com/bitcoin/bitcoin.git
@@ -266,24 +256,20 @@ This example lists the steps necessary to setup and build a command line only, n
     make check
 
 Note:
-Enabling wallet support requires either compiling against a Berkeley DB newer than 4.8 (package `db`) using `--with-incompatible-bdb`,
-or building and depending on a local version of Berkeley DB 4.8. The readily available Arch Linux packages are currently built using
-`--with-incompatible-bdb` according to the [PKGBUILD](https://projects.archlinux.org/svntogit/community.git/tree/bitcoin/trunk/PKGBUILD).
-As mentioned above, when maintaining portability of the wallet between the standard Bitcoin Core distributions and independently built
-node software is desired, Berkeley DB 4.8 must be used.
+有錢包支援的編譯需要用 Berkeley DB 4.8 (package `db`) 之後的版本，輸入 `--with-incompatible-bdb`，或建立和相依在一個本地版的 Berkeley DB 4.8. 這個立即可用的 Arch Linux 包可以輸入`--with-incompatible-bdb` 來建立，這是根據 [PKGBUILD](https://projects.archlinux.org/svntogit/community.git/tree/bitcoin/trunk/PKGBUILD)。
+如前所述，當需要維持錢包在 standard Bitcoin Core distributions 和 independently built
+node software 的可攜愛性，必須使用 Berkeley DB 4.8 。 
 
 
 ARM Cross-compilation
 -------------------
-These steps can be performed on, for example, an Ubuntu VM. The depends system
-will also work on other Linux distributions, however the commands for
-installing the toolchain will be different.
+這個步驟能夠幫助它在像是 Ubuntu VM 上運行，相依系統也能在其他 Linux distributions 運作，然而安裝 toolchain 會不同。
 
-First install the toolchain:
+首先，安裝 toolchain:
 
     sudo apt-get install g++-arm-linux-gnueabihf
 
-To build executables for ARM:
+建立 ARM 執行檔:
 
     cd depends
     make HOST=arm-linux-gnueabihf NO_QT=1
@@ -292,4 +278,4 @@ To build executables for ARM:
     make
 
 
-For further documentation on the depends system see [README.md](../depends/README.md) in the depends directory.
+有夠相依系統更進一步的資訊，可看相依目錄 [README.md](../depends/README.md) 。
