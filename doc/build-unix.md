@@ -32,7 +32,7 @@ Dependencies
  函式庫      | 目的             | 描述
  ------------|------------------|----------------------
  libssl      | Crypto           | Random Number Generation, 橢圓曲線密碼學
- libboost    | Utility          | 函式庫包含執行續、資料結構...等
+ libboost    | Utility          | 函式庫包含執行緒、資料結構...等
  libevent    | Networking       | 作業系統獨立非同步網路連結
 
 可選擇的相依套件:
@@ -108,7 +108,7 @@ libqrencode (可選擇的) 可以用以下來安裝:
 
     sudo apt-get install libqrencode-dev
 
-安裝後，他們可以被配置找到，然後一個 bitcoin-qt 執行檔會預設建立。
+安裝後，他們可以被配置找到，然後一個 bitcoin-qt 執行文件會預設建立。
 
 Dependency Build Instructions: Fedora
 -------------------------------------
@@ -130,7 +130,7 @@ libqrencode (可選擇的) 可以用以下來安裝:
 
 Notes
 -----
-這個發布是用 GCC 來建立的，然後 "strip bitcoind" 來去除除錯符號，減少了大約 90% 的執行檔大小。
+這個發布是用 GCC 來建立的，然後 "strip bitcoind" 來去除除錯符號，減少了大約 90% 的執行文件大小。
 
 
 miniupnpc
@@ -197,35 +197,31 @@ Hardening Flags:
 
 Hardening 有下列特色:
 
-* 地址無關可執行文件
-    建立地址無關代碼可以讓一些 kernels 提供位址空間配置隨機載入的優點，可以攻擊任意記憶體位址的攻擊者會因為他們不知道哪裡放的資料是有用的而失敗， stack 和 heap 可以隨機配置，這也讓 code section 也能隨機配置。
+* Position Independent Executable 地址無關可執行文件
+    建立地址無關代碼可以讓一些 kernels 提供位址空間配置隨機載入的優點，可以攻擊任意記憶體位址的攻擊者會因為他們不知道哪裡放的資料是有用的而失敗， 堆疊和堆積 可以隨機配置，這也讓 code section 也能隨機配置。
 
     在一個沒有用 -fPIC 來編譯函式庫的 AMD64 處理器，這會導致一個錯誤像是: "relocation R_X86_64_32 against `......' can not be used when making a shared object;"
 
-    To test that you have built PIE executable, install scanelf, part of paxutils, and use:
+    測是當已經建立 PIE 執行文件, install scanelf, part of paxutils, and use:
 
     	scanelf -e ./bitcoin
 
-    The output should contain:
+    輸出應該包含:
 
      TYPE
     ET_DYN
 
-* Non-executable Stack
-    If the stack is executable then trivial stack based buffer overflow exploits are possible if
-    vulnerable buffers are found. By default, bitcoin should be built with a non-executable stack
-    but if one of the libraries it uses asks for an executable stack or someone makes a mistake
-    and uses a compiler extension which requires an executable stack, it will silently build an
-    executable without the non-executable stack protection.
+* Non-executable Stack 不可執行之堆疊區段
+    如果推疊是可執行的，弱點緩衝器被發現的話，則基於瑣細堆疊的緩衝器是有可能會 overflow ， 預設中， bitcoin 應該以不可執行之堆疊區段建立，但是如果其中一個它使用的函式庫請求一個可執行的堆疊或因製造錯誤而用編譯器擴充而需要一個可執行的堆疊，它便會默默地建立一個沒受到不可執行之堆疊區段保護的可執行堆疊。
 
-    To verify that the stack is non-executable after compiling use:
+    驗證堆疊是不可執行的，輸入:
     `scanelf -e ./bitcoin`
 
-    the output should contain:
+    輸出應包含:
 	STK/REL/PTL
 	RW- R-- RW-
 
-    The STK RW- means that the stack is readable and writeable but not executable.
+    STK RW- 代表這個堆疊是可讀和可的但不可執行。
 
 Disable-wallet mode
 --------------------
@@ -269,7 +265,7 @@ ARM Cross-compilation
 
     sudo apt-get install g++-arm-linux-gnueabihf
 
-建立 ARM 執行檔:
+建立 ARM 執行文件:
 
     cd depends
     make HOST=arm-linux-gnueabihf NO_QT=1
