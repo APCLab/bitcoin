@@ -1,19 +1,18 @@
 Developer Notes
 ===============
 
-Various coding styles have been used during the history of the codebase,
-and the result is not very consistent. However, we're now trying to converge to
-a single style, so please use it in new code. Old code will be converted
-gradually.
-- Basic rules specified in [src/.clang-format](/src/.clang-format).
-  Use a recent clang-format to format automatically using one of the [dev scripts]
+從古至今在codebase中有許多許多不同的coding方式已被使用，但是結果並不完全一致。無論如何，我們現在決定要縮減到單一的形式，所以請在新的code中使用。舊的code會漸漸地被轉換過去。
+
+一些基本的規則列在[src/.clang-format](/src/.clang-format).
+
+  利用了最新的clang-format來自動化的調整格式 [dev scripts]
   (/contrib/devtools/README.md#clang-formatpy).
-  - Braces on new lines for namespaces, classes, functions, methods.
-  - Braces on the same line for everything else.
-  - 4 space indentation (no tabs) for every block except namespaces.
-  - No indentation for public/protected/private or for namespaces.
-  - No extra spaces inside parenthesis; don't do ( this )
-  - No space after function names; one space after if, for and while.
+  - 支援 on new lines for namespaces, classes, functions, methods.
+  - 支援 on the same line for everything else.
+  - 四格的縮排 (no tabs) for every block except namespaces.
+  - 沒有縮排 for public/protected/private or for namespaces.
+  - 沒有額外空格 inside parenthesis; don't do ( this )
+  - function names後面誣控格; if, for and while後面一個空格.
 
 Block style example:
 ```c++
@@ -40,9 +39,7 @@ class Class
 
 Doxygen comments
 -----------------
-
-To facilitate the generation of documentation, use doxygen-compatible comment blocks for functions, methods and fields.
-
+為了更容易的產生文件，functions, methods和fields使用了相容doxygen的comment blocks
 For example, to describe a function use:
 ```c++
 /**
