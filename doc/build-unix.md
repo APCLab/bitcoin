@@ -43,10 +43,10 @@ Dependencies
  miniupnpc   | UPnP Support     | 跳防火牆輔助
  libdb4.8    | Berkeley DB      | 錢包儲存 (只有錢包啟動時需要)
  qt          | GUI              | 圖形用戶介面工具包 (只有圖形用戶介面啟動時需要)
- protobuf    | Payments in GUI  | Data interchange format used for payment protocol (只有圖形用戶介面啟動時需要)
- libqrencode | QR codes in GUI  | Optional for generating QR codes (只有圖形用戶介面啟動時需要)
- univalue    | Utility          | JSON parsing and encoding (bundled version will be used unless --with-system-univalue passed to configure)
- libzmq3     | ZMQ notification | Optional, allows generating ZMQ notifications (requires ZMQ version >= 4.x)
+ protobuf    | Payments in GUI  | 支付協定用資料交換格式 (只有圖形用戶介面啟動時需要)
+ libqrencode | QR codes in GUI  | 可選擇的產生 QR codes (只有圖形用戶介面啟動時需要)
+ univalue    | Utility          | JSON parsing 和編碼 (除非 --with-system-univalue 完成配置，否則會使用附帶版本)
+ libzmq3     | ZMQ notification | 可選擇的，允許產生 ZMQ 通知 (需要 4.x 以上的 ZMQ 版本)
 
 For the versions used in the release, see [release-process.md](release-process.md) under *Fetch and build inputs*.
 
