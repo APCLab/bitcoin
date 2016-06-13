@@ -51,14 +51,12 @@ C++11 and Python 3
 0.13.0 Change log
 =================
 
-Detailed release notes follow. This overview includes changes that affect
-behavior, not code moves, refactors and string updates. For convenience in locating
-the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+以下是較Detailed的release notes.此概述包含影響運轉狀態的更動,而非code的移動,refactors及字串更動
+為了locating的方便,code的更及伴隨的討論,包含pull request和git merge commit都有提到
 
 ### RPC and REST
 
-Asm script outputs now contain OP_CHECKLOCKTIMEVERIFY in place of OP_NOP2
+Asm script的輸出現在包含 OP_CHECKLOCKTIMEVERIFY 來代替 OP_NOP2
 -------------------------------------------------------------------------
 
 OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
