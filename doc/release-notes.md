@@ -62,7 +62,7 @@ Asm script的輸出現在包含 OP_CHECKLOCKTIMEVERIFY 來代替 OP_NOP2
 OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
 65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki)
 
-The following outputs are affected by this change:
+以下輸出因上述更動而有所改變:
 - RPC `getrawtransaction` (in verbose mode)
 - RPC `decoderawtransaction`
 - RPC `decodescript`
@@ -73,17 +73,14 @@ The following outputs are affected by this change:
 New mempool information RPC calls
 ---------------------------------
 
-RPC calls have been added to output detailed statistics for individual mempool
-entries, as well as to calculate the in-mempool ancestors or descendants of a
-transaction: see `getmempoolentry`, `getmempoolancestors`, `getmempooldescendants`.
+RPC calls的詳細統計資料被增加到輸出中個別的mempool entries中,為了計算交易的in-mempool祖先或子孫
+see `getmempoolentry`, `getmempoolancestors`, `getmempooldescendants`.
 
 ### ZMQ
 
-Each ZMQ notification now contains an up-counting sequence number that allows
-listeners to detect lost notifications.
-The sequence number is always the last element in a multi-part ZMQ notification and
-therefore backward compatible.
-Each message type has its own counter.
+每個ZMQ 通知現在都包含一個up-counting的序列數字讓listeners可以偵測到遺失的通知
+序列數字永遠都是一個多部份的ZMQ通知中的最後一個元素,因此也支援向後相容
+每個massage type都有自己的counter
 (https://github.com/bitcoin/bitcoin/pull/7762)
 
 ### Configuration and command-line options
