@@ -6,8 +6,7 @@ UNIX BUILD NOTES
 
 Note
 ---------------------
-總是用絕對路徑來配置和編譯比特幣和相依套件，
-舉例來說，當說明相依套件的路徑:
+總是用絕對路徑來配置和編譯比特幣和相依套件，舉例來說，當說明相依套件的路徑:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 
@@ -48,14 +47,12 @@ Dependencies
  univalue    | Utility          | JSON parsing 和編碼 (除非 --with-system-univalue 完成配置，否則會使用附帶版本)
  libzmq3     | ZMQ notification | 可選擇的，允許產生 ZMQ 通知 (需要 4.x 以上的 ZMQ 版本)
 
-For the versions used in the release, see [release-process.md](release-process.md) under *Fetch and build inputs*.
+關於發布出的使用版本，可以看 [release-process.md](release-process.md) 中的 *Fetch and build inputs*.
 
 Memory Requirements
 --------------------
 
-C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling Bitcoin Core. On systems with less, gcc can be
-tuned to conserve memory with additional CXXFLAGS:
+C++ 編譯器非常需要記憶體，當編譯 Bitcoin Core 時，建議至少要有 1.5 GB 的記憶體可以使用，On systems with less, gcc can be tuned to conserve memory with additional CXXFLAGS:
 
 
     ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
