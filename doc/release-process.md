@@ -1,23 +1,23 @@
 Release Process
 ====================
 
-Before every release candidate:
+在每個發布候選之前:
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex)
+* 更新翻譯 (ping wumpus on IRC) 見 [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex)
 
-Before every minor and major release:
+在每個次要發布和主要發布之前:
 
-* Update [bips.md](bips.md) to account for changes since the last release.
-* Update version in sources (see below)
-* Write release notes (see below)
+* 更新 [bips.md](bips.md) 解釋與上次更新的改變。
+* 更新原始的版本 (見下)
+* 寫更新筆記 (見下)
 
-Before every major release:
+在每個主要發布之前:
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) for an example. 
+* 更新 hardcoded [seeds](/contrib/seeds/README.md) ，見範例 [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) 。
 
 ### First time / New builders
 
-Check out the source code in the following directory hierarchy.
+用以下目錄階層圖檢查檢查原始碼。
 
     cd /path/to/your/toplevel/build
     git clone https://github.com/bitcoin-core/gitian.sigs.git
@@ -27,20 +27,20 @@ Check out the source code in the following directory hierarchy.
 
 ### Bitcoin maintainers/release engineers, update version in sources
 
-Update the following:
+更新以下:
 
 - `configure.ac`:
     - `_CLIENT_VERSION_MAJOR`
     - `_CLIENT_VERSION_MINOR`
     - `_CLIENT_VERSION_REVISION`
-    - Don't forget to set `_CLIENT_VERSION_IS_RELEASE` to `true`
+    - 別忘了將 `_CLIENT_VERSION_IS_RELEASE` 設置為 `true`
 - `src/clientversion.h`: (this mirrors `configure.ac` - see issue #3539)
     - `CLIENT_VERSION_MAJOR`
     - `CLIENT_VERSION_MINOR`
     - `CLIENT_VERSION_REVISION`
-    - Don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`
-- `doc/README.md` and `doc/README_windows.txt`
-- `doc/Doxyfile`: `PROJECT_NUMBER` contains the full version
+    - 別忘了將 `CLIENT_VERSION_IS_RELEASE` 設置為 `true`
+- `doc/README.md` 和 `doc/README_windows.txt`
+- `doc/Doxyfile`: `PROJECT_NUMBER` 包含完全版本
 - `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
 
 Write release notes. git shortlog helps a lot, for example:
