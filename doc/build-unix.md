@@ -6,7 +6,7 @@ UNIX BUILD NOTES
 
 Note
 ---------------------
-總是用絕對路徑來配置和編譯比特幣和相依套件，舉例來說，當決定相依套件的路徑:
+總是用絕對路徑來配置和編譯比特幣和dependencies，舉例來說，當決定相依套件的路徑:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 
@@ -22,12 +22,12 @@ make
 make install # optional
 ```
 
-如果相依套件正確的話，這也會建立 bitcoin-qt。
+如果dependencies正確的話，這也會建立 bitcoin-qt。
 
 Dependencies
 ---------------------
 
-需要的相依套件:
+需要的dependencies:
 
  函式庫      | 目的             | 描述
  ------------|------------------|----------------------
@@ -35,15 +35,15 @@ Dependencies
  libboost    | Utility          | 函式庫包含執行緒、資料結構...等
  libevent    | Networking       | 作業系統獨立非同步網路連結
 
-可選擇的相依套件:
+可選擇的dependencies:
 
  函式庫      | 目的             | 描述
  ------------|------------------|----------------------
- miniupnpc   | UPnP Support     | 跳防火牆輔助
- libdb4.8    | Berkeley DB      | 錢包儲存 (只有錢包啟動時需要)
- qt          | GUI              | 圖形用戶介面工具包 (只有圖形用戶介面啟動時需要)
- protobuf    | Payments in GUI  | 支付協定用資料交換格式 (只有圖形用戶介面啟動時需要)
- libqrencode | QR codes in GUI  | 可選擇的產生 QR codes (只有圖形用戶介面啟動時需要)
+ miniupnpc   | UPnP Support     | 翻防火牆
+ libdb4.8    | Berkeley DB      | 錢包儲存 (只有Wallet啟動時需要)
+ qt          | GUI              | GUI工具包 (只有GUI啟動時需要)
+ protobuf    | Payments in GUI  | 支付協定用資料交換格式 (只有GUI啟動時需要)
+ libqrencode | QR codes in GUI  | 可選擇的產生 QR codes (只GUI啟動時需要)
  univalue    | Utility          | JSON parsing 和編碼 (除非 --with-system-univalue 完成配置，否則會使用附帶版本)
  libzmq3     | ZMQ notification | 可選擇的，允許產生 ZMQ 通知 (需要 4.x 以上的 ZMQ 版本)
 
@@ -87,7 +87,7 @@ Ubuntu 和 Debian 有他們自己的 libdb-dev 和 libdb++-dev 包，但這要�
 
     sudo apt-get install libminiupnpc-dev (see --with-miniupnpc and --enable-upnp-default)
 
-ZMQ 相依套件:
+ZMQ dependencies:
 
     sudo apt-get install libzmq3-dev (provides ZMQ API 4.x)
 
